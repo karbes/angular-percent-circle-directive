@@ -16,10 +16,12 @@
 				percent : '=',
 				colors  : '=?',
 				speed   : '=?',
-				cap   : '=?'
+				cap   : '=?',
+				step   : '=?'
 			},
 			link: function($scope, element, attrs) {
 				if($scope.speed == undefined) $scope.speed = 10;
+				if (!$scope.step) $scope.step = 1;
 				$scope.curPercent = 0;
 				$scope.highlight;
 				var animateTimeout,
@@ -63,7 +65,7 @@
 				// Loop through and increment percentage to animate in DOM
 				function animatePercentChange(fromVal, toVal) {
 					if(fromVal != toVal) {
-						$scope.curPercent = (fromVal < toVal) ? fromVal + 1 : fromVal - 1;
+						$scope.curPercent = (fromVal < toVal) ? fromVal + $scope.step : toVal;
 						var deg = getDegrees($scope.curPercent);
 
 						setHighlight(deg);

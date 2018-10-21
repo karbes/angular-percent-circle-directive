@@ -104,3 +104,14 @@ Add the `cap` attribute to the `percent-circle` HTML tag like this:
 <percent-circle percent="myPercentModel" cap="false"></percent-circle>
 ```
 Now the percent circle will show bigger than 100 numbers.
+
+### Step on Percent animation
+
+The directive takes an optional attribute called `step`. Specify higher than 1 if there are many directives on one page and it gets laggy. Default is 1 .
+
+Add the `step` attribute to the `percent-circle` HTML tag like this:
+
+```html
+<percent-circle percent="myPercentModel" step="5"></percent-circle>
+```
+Now the percent circle will jump with 5-step increment.
