@@ -6,8 +6,8 @@
 			restrict: 'E',
 			replace: true,
 			template: 	'<div class="pc-container">' +
-							'<div class="pc-border" ng-style="highlight">' + 
-								'<div class="pc-circle">' + 
+							'<div class="pc-border" ng-style="highlight">' +
+								'<div class="pc-circle">' +
 									'<span class="pc-percent">{{curPercent}}%</span>' +
 								'</div>' +
 							'</div>' +
@@ -15,7 +15,8 @@
 			scope: {
 				percent : '=',
 				colors  : '=?',
-				speed   : '=?'
+				speed   : '=?',
+				cap   : '=?'
 			},
 			link: function($scope, element, attrs) {
 				if($scope.speed == undefined) $scope.speed = 10;
@@ -38,7 +39,7 @@
 
 					element[0].querySelector('.pc-border').style.backgroundColor = colors.highlight;
 					element[0].querySelector('.pc-circle').style.backgroundColor = colors.center;
-					
+
 					setHighlight($scope.curPercent);
 				}
 				setColors();
@@ -55,6 +56,7 @@
 
 				// takes the percentage and returns complimentary degrees
 				function getDegrees(percent) {
+					if (percent > 100) percent = 100;
 					return (percent/100) * 360;
 				}
 
@@ -77,9 +79,9 @@
 					if(!isNaN(newVal)) {
 						// make sure value is whole number between 0-100
 						newVal = Math.round(newVal);
-						if(newVal > 100) newVal = 100;
+						if($scope.cap && newVal > 100) newVal = 100;
 						if(newVal < 0) newVal = 0;
-						
+
 						if($scope.speed) {
 							// checks oldVal against currently displayed percent to prevent animation jump
 							var startVal = (oldVal !== $scope.curPercent) ? $scope.curPercent : oldVal;

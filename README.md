@@ -94,3 +94,13 @@ If you do not want the animation, simply set the `speed` attribute to `false`.
 ```
 Now the percent circle will jump to the provided percent without incrementing.
 
+### Raise % Cap
+
+The directive takes an optional attribute called `cap`. The value is boolean indicating if over 100% label is allowed. Default is true (capped at 100%).
+
+Add the `cap` attribute to the `percent-circle` HTML tag like this:
+
+```html
+<percent-circle percent="myPercentModel" cap="false"></percent-circle>
+```
+Now the percent circle will show bigger than 100 numbers.
